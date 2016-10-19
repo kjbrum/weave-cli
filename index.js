@@ -1,15 +1,16 @@
 'use strict';
 
 const fs = require('fs');
-const chalk = require('chalk');
-const emmet = require('emmet');
+const mkdirp = require('mkdirp');
 const parser = require('emmet/lib/parser/abbreviation');
 
+const chalk = require('chalk');
 const success = chalk.green;
 const warn = chalk.yellow;
 const error = chalk.red;
+const partialsDir = 'partials/';
 
-// Do the good stuff
+// ~~~~~~~~~~ Perform black magic ~~~~~~~~~~ //
 const sbx = module.exports = (template, opts, cb) => {
     if (typeof opts !== 'object') {
         cb = opts;
@@ -27,14 +28,16 @@ const sbx = module.exports = (template, opts, cb) => {
     var json = getTemplate(template);
     console.log(json);
 
+    // Check if we should be parsing a partials or pages template
     if (opts.partials) {
-        console.log('Make partials...');
-        loopObj(json, function(key, val) {
-            console.log(key + ' ==> ' + val);
-            var html = parser.expand(val, {profile: 'html'});
-            html.replace('${0}', '#');
+        loopObj(json, (key, val) => {
+            // Expand the string to actual code
+            var html = parser.expand(val, {
+                profile: 'html'
+            });
 
-            createPartial(key, html);
+            // Create the partial
+            createPartial(key, html.replace('/$$\{0\}/gi', ''));
         });
     } else {
         // TODO
@@ -45,7 +48,7 @@ const sbx = module.exports = (template, opts, cb) => {
 };
 
 // Loop through an object
-const loopObj = function(obj, cb) {
+const loopObj = (obj, cb) => {
     for (var key in obj) {
         if (!obj.hasOwnProperty(key)) continue;
 
@@ -58,8 +61,8 @@ const loopObj = function(obj, cb) {
 const getTemplate = (template) => {
     try {
         template = fs.readFileSync(template, 'utf8');
-    } catch (e) {
-        console.log(error(e));
+    } catch (err) {
+        console.error(error(e));
         process.exit(0);
     }
 
@@ -68,5 +71,25 @@ const getTemplate = (template) => {
 
 // Create a new partial
 var createPartial = (path, html) => {
-    console.log(path, html);
+    var ogPath = path;
+    var lastIndex = ogPath.lastIndexOf('/');
+    var path = ogPath.substring(0, lastIndex + 1);
+    var filename = ogPath.substring(lastIndex + 1, ogPath.length) + '.mustache';
+
+    // Create the necessary directories and the partial
+    mkdirp(partialsDir + path, function(err) {
+        if (err) {
+            console.error(error(err));
+            process.exit(0);
+        } else {
+            fs.writeFile(partialsDir + path + filename, html, (err) => {
+                if (err) {
+                    console.error(error(err));
+                    process.exit(0);
+                } else {
+                    console.log(success(filename + ' created at ' + partialsDir + path));
+                }
+            });
+        }
+    });
 }
