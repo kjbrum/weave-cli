@@ -37,7 +37,7 @@ const sbx = module.exports = (template, opts, cb) => {
             });
 
             // Create the partial
-            createPartial(key, html.replace('/$$\{0\}/gi', ''));
+            createPartial(key, html);
         });
     } else {
         // TODO
