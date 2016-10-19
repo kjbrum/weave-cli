@@ -1,0 +1,5 @@
+{
+    "sections/section-hero": ".section.section--hero>.container>h1+h4",
+    "blocks/block": ".block>img[src=#].block__image+.block__title+.block__description",
+    "sections/section-signup": ".section.section--signup>.container>.g.g-m-2>(.gi>h4)+(.gi>form>input:email+input:submit)"
+}
