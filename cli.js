@@ -9,15 +9,15 @@ const warn = chalk.yellow;
 // Handle the arguments
 const cli = meow(`
     Usage:
-      $ sbx <path/to/template> <options>
+      $ sbx-proto <path/to/template> <options>
 
     Options:
       --pages       Parse the JSON template to pages
       --partials    Parse the JSON template to partials
 
     Example:
-      $ sbx test/tester-pages.json --pages
-      $ sbx test/tester-partials.json --partials
+      $ sbx-proto test/tester-pages.json --pages
+      $ sbx-proto test/tester-partials.json --partials
 `);
 
 // Check if a json file is supplied
