@@ -62,7 +62,7 @@ const getTemplate = (template) => {
         template = fs.readFileSync(template, 'utf8');
     } catch (err) {
         throw new Error(err);
-        process.exit(0);
+        process.exit(1);
     }
 
     return JSON.parse(template);
@@ -79,12 +79,12 @@ var createPartial = (path, html) => {
     mkdirp(partialsDir + path, function(err) {
         if (err) {
             throw new Error(err);
-            process.exit(0);
+            process.exit(1);
         } else {
             fs.writeFile(partialsDir + path + filename, html, (err) => {
                 if (err) {
                     throw new Error(err);
-                    process.exit(0);
+                    process.exit(1);
                 } else {
                     console.log(success(filename + ' created at ' + partialsDir + path));
                 }

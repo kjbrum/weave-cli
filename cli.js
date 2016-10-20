@@ -28,7 +28,7 @@ if(!cli.input[0]) {
 
 // Check if a template file is supplied
 if(!cli.flags.partials && !cli.flags.pages) {
-    console.log(warn('You must supply the --pages or --partials flag.'));
+    console.error(warn('You must supply the --pages or --partials flag.'));
     process.exit(1);
 }
 
