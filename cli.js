@@ -3,7 +3,7 @@
 
 const meow  = require('meow');
 const chalk   = require('chalk');
-const sbx = require('./');
+const sbxProtoCLI = require('./');
 const warn = chalk.yellow;
 
 // Handle the arguments
@@ -33,7 +33,7 @@ if(!cli.flags.partials && !cli.flags.pages) {
 }
 
 // Call the sbx module
-sbx(cli.input[0], cli.flags, function(err, res) {
+sbxProtoCLI(cli.input[0], cli.flags, function(err, res) {
     if(err) throw err;
 
     process.exit(0);

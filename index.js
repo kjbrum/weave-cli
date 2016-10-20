@@ -11,7 +11,7 @@ const error = chalk.red;
 const partialsDir = 'partials/';
 
 // ~~~~~~~~~~ Perform black magic ~~~~~~~~~~ //
-const sbx = module.exports = (template, opts, cb) => {
+const sbxProtoCLI = module.exports = (template, opts, cb) => {
     if (typeof opts !== 'object') {
         cb = opts;
         opts = {};
