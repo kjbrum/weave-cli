@@ -3,8 +3,8 @@
 const fs = require('fs');
 const mkdirp = require('mkdirp');
 const parser = require('emmet/lib/parser/abbreviation');
-
 const chalk = require('chalk');
+
 const success = chalk.green;
 const warn = chalk.yellow;
 const error = chalk.red;
@@ -26,7 +26,6 @@ const sbx = module.exports = (template, opts, cb) => {
     }
 
     var json = getTemplate(template);
-    console.log(json);
 
     // Check if we should be parsing a partials or pages template
     if (opts.partials) {
