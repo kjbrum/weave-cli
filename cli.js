@@ -3,21 +3,21 @@
 
 const meow  = require('meow');
 const chalk   = require('chalk');
-const sbxProtoCLI = require('./');
+const weaveCLI = require('./');
 const warn = chalk.yellow;
 
 // Handle the arguments
 const cli = meow(`
     Usage:
-      $ sbx-proto <path/to/template> <options>
+      $ weave <path/to/template> <options>
 
     Options:
       --pages       Parse the JSON template to pages
       --partials    Parse the JSON template to partials
 
     Example:
-      $ sbx-proto test/tester-pages.json --pages
-      $ sbx-proto test/tester-partials.json --partials
+      $ weave test/tester-pages.json --pages
+      $ weave test/tester-partials.json --partials
 `);
 
 // Check if a json file is supplied
@@ -33,7 +33,7 @@ if(!cli.flags.partials && !cli.flags.pages) {
 }
 
 // Call the sbx module
-sbxProtoCLI(cli.input[0], cli.flags, function(err, res) {
+weaveCLI(cli.input[0], cli.flags, function(err, res) {
     if(err) throw err;
 
     process.exit(0);

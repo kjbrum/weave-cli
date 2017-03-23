@@ -10,8 +10,8 @@ const warn = chalk.yellow;
 const error = chalk.red;
 const partialsDir = 'partials/';
 
-// ~~~~~~~~~~ Perform black magic ~~~~~~~~~~ //
-const sbxProtoCLI = module.exports = (template, opts, cb) => {
+// ~~~~~~~~~~ Perform magic ~~~~~~~~~~ //
+const weaveProtoCLI = module.exports = (template, opts, cb) => {
     if (typeof opts !== 'object') {
         cb = opts;
         opts = {};

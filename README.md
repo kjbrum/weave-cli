@@ -1,8 +1,23 @@
-# SBX Proto CLI
+# Weave CLI
 
-> CLI for use with the sbx-proto project.
+> CLI for use with Weave.
 
 
-## To-Do
+## Usage
 
-- [ ] Allow the user to answer prompts instead of passing options and flags
+```
+Usage:
+  $ weave <path/to/template> <options>
+
+Options:
+  --pages       Parse the JSON template to pages
+  --partials    Parse the JSON template to partials
+
+Example:
+  $ weave test/tester-partials.json --partials
+```
+
+
+## License
+
+Copyright &copy; [Kyle Brumm](http://kylebrumm.com). Weave CLI is free to use on whatever and may be redistributed under the terms specified in the [license](LICENSE.md).
